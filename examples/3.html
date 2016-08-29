@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Stylee css for svg</title>
+    <style media="screen">
+      svg path {
+        stroke : red;
+        stroke-width : 23px;
+        fill : orange;
+      }
+
+      svg text {
+        stroke : blue;
+        stroke-width : 1Dpx;
+        fill : green;
+      }
+    </style>
+    <script src="d3.min.js"></script>
+  </head>
+  <body>
+    <script >
+		//Create the SVG
+var svg = d3.select("body").append("svg")
+		.attr("width", 400)
+		.attr("height", 120);
+
+//Create an SVG path
+svg.append("path")
+	.attr("id", "wavy") //very important to give the path element a unique ID to reference later
+	.attr("d", "M 10,90 Q 100,15 200,70 Q 340,140 400,30") //Notation for an SVG path, from bl.ocks.org/mbostock/2565344
+	.style("fill", "none")
+	.style("stroke", "#aaaaaa");
+
+svg.append("use")
+  .attr("xlink:href", "#wavy")
+
+//Create an SVG text element and append a textPath element
+svg.append("text")
+   .append("textPath") //append a textPath to the text element
+	.attr("xlink:href", "#wavy") //place the ID of the path here
+	.style("text-anchor","middle") //place the text halfway on the arc
+	.attr("startOffset", "50%")
+	.text("Yay, my text is on a wavy path");
+
+    </script>
+    <svg>
+      <path d="M 100 50 L 250 50 L 300 67 z"></path>
+      <text x="22" y="45">Naruto</text>
+    </svg>
+
+  </body>
+</html>
